@@ -1,6 +1,9 @@
 ﻿#include "SERV_STAT.h"
 #include "TCPserver.h"
 #include "TCPclient.h"
+#include "VECTOR.h"
+
+LinkStatisticsService statisticsService;
 
 // Пеобразование HEX в Char
 char HexToChar(std::string hex) {
@@ -14,7 +17,6 @@ char HexToChar(std::string hex) {
 // Поиск подстроки и чистка строки (парсинг)
 std::string find_url(std::string s, std::string url_s) {
     std::string url_d = "", url = "";
-    //s.assign(buf);
     unsigned int i = s.find(url_s);//ищем подстроку
     if (i != std::string::npos) {//если нашли
         for (unsigned int j = i + url_s.size(); j < s.size(); j++) {//создаем грязную строку
@@ -41,6 +43,7 @@ std::string find_url(std::string s, std::string url_s) {
     return url;
 }
 
+
 void Client(int client_socket) {
 
     char buf[2024];
@@ -53,12 +56,9 @@ void Client(int client_socket) {
     std::stringstream stat;
 
     if (result > 0) {
-       // Мы знаем фактический размер полученных данных, поэтому ставим метку конца строки
-       // В буфере запроса.
-        buf[result] = '\0';
-        std::string long_url = "", short_url = "", Err = "нет";
+        buf[result] = '\0'; // Мы знаем фактический размер полученных данных, поэтому ставим метку конца строки В буфере запроса.
+        std::string long_url = "", short_url = "", url = "", Err = "нет";
         std::string buf1 = "", buf2 = "", clientIP = "", tim = "";
-        char ttt[5];
 
         for (int i = 0; i < 4; i++) {
             buf1 += buf[i];
@@ -68,12 +68,9 @@ void Client(int client_socket) {
 
         if (buf1 == "POST") {
             do {
-                short_url = find_url(s, "report");
-                if (short_url == "") {// server short
-                    short_url = find_url(s, "short_url=");
-                    long_url = find_url(s, "long_url=");
-                    clientIP = find_url(s, "clientIP=");
-                    t = stoi(find_url(s, "time="));
+                if (s.find("/report") == std::string::npos) {//ищем подстроку
+                 // проверяем на запрос POST /report
+                //репорта нет, значит POST от сервера ссылок, отправляем принятую строку с данными транзитом на базу
                     SOCKET ClientSock = TCPclient(IP_BASE, PORT_BASE);// соединение с базой даных
                     if (!ClientSock) {
                         Err = "Ошибка записи в базу данных";
@@ -82,16 +79,54 @@ void Client(int client_socket) {
                     Transmit(ClientSock, s);
                     Close(ClientSock);
                 }
-                else {
-                    // yandex
+                else {// report
+                    s = "GET_count";// формируем запрос в базу на кол-во запмсей
+                    SOCKET ClientSock = TCPclient(IP_BASE, PORT_BASE);// соединение с базой даных
+                    if (!ClientSock) {
+                        Err = "Ошибка запроса базы данных";
+                        break;
+                    }
+                    Transmit(ClientSock, s);// запрашиваем count
+                    s = Receive(ClientSock);// получаем
+                    Close(ClientSock);
+                    int count = stoi(s);// в инт
+
+                    for (int i = 0; i < count; i++) {// запрашиваем последовательно все записи
+
+                        s = "GET_data data=" + std::to_string(i);
+                        SOCKET ClientSock = TCPclient(IP_BASE, PORT_BASE);// соединение с базой даных
+                        if (!ClientSock) {
+                            Err = "Ошибка запроса базы данных";
+                            break;
+                        }
+                        Transmit(ClientSock, s);//
+                        s = Receive(ClientSock);// получаем запись
+                        Close(ClientSock);
+                        short_url = find_url(s, "short_url=");// парсим
+                        long_url = find_url(s, "long_url=");
+                        clientIP = find_url(s, "clientIP=");
+                        tim = find_url(s, "time=");
+                        url = long_url + "(" + short_url + ")";
+                        statisticsService.Statist(s, url, clientIP, tim);// отправляем на обрабортку
 
 
-
+                    }
                 }
 
             } while (false);
         }
-   // SendToTCP(client_socket, buf1);
+
+        response_body = statisticsService.main2();// готовим ответ серверу
+                // Формируем весь ответ вместе с заголовками
+        response << "HTTP/1.1 200 OK\r\n"
+            << "Version: HTTP/1.1\r\n"
+            << "Content-Type: text/html; charset=cp1251\r\n"
+            << "Content-Length: " << response_body.str().length()
+            << "\r\n\r\n"
+            << response_body.str();
+
+        // Отправляем ответ клиенту с помощью функции send
+        SendToTCP(client_socket, response.str());
 
 
     }
@@ -104,6 +139,7 @@ void Client(int client_socket) {
 
 
 int main() {
+    //main2();
     //nlohmann::json j = {
     //    {"name", "John"},
     //    {"age", 30},

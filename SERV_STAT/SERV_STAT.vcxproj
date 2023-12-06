@@ -148,11 +148,13 @@
     <ClCompile Include="SERV_STAT.cpp" />
     <ClCompile Include="TCPclient.cpp" />
     <ClCompile Include="TCPserver.cpp" />
+    <ClCompile Include="VECTOR.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SERV_STAT.h" />
     <ClInclude Include="TCPclient.h" />
     <ClInclude Include="TCPserver.h" />
+    <ClInclude Include="VECTOR.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

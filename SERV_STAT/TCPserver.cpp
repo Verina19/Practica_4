@@ -112,7 +112,7 @@ SOCKET socket(int <семейство используемых адресов>, int <тип сокета>, int <тип п
         return 1;
     }
 
-    std::cout << "—ервер запущен. Listening..." << std::endl;
+    std::cout << "—ервер статистики запущен. Listening..." << std::endl;
 
     return listen_socket;
 }
