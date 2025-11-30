@@ -345,14 +345,6 @@
         <mxCell id="C107gXivKD9xKijmlaR7-2" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="uCwv0CKlvjAdJUgz0ARH-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="uCwv0CKlvjAdJUgz0ARH-9" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="C107gXivKD9xKijmlaR7-8" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="uCwv0CKlvjAdJUgz0ARH-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=default;dashed=1;dashPattern=8 8;" target="uCwv0CKlvjAdJUgz0ARH-12">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="-514" y="305" />
-              <mxPoint x="-514" y="135" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
         <mxCell id="uCwv0CKlvjAdJUgz0ARH-14" parent="WIyWlLk6GJQsqaUBKTNV-1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;pre style=&quot;font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-size-adjust: none; font-kerning: auto; font-optical-sizing: auto; font-feature-settings: normal; font-variation-settings: normal; font-variant-position: normal; font-variant-emoji: normal; font-stretch: normal; line-height: 22px; font-family: Menlo, Monaco, Consolas, &amp;quot;Cascadia Mono&amp;quot;, &amp;quot;Ubuntu Mono&amp;quot;, &amp;quot;DejaVu Sans Mono&amp;quot;, &amp;quot;Liberation Mono&amp;quot;, &amp;quot;JetBrains Mono&amp;quot;, &amp;quot;Fira Code&amp;quot;, Cousine, &amp;quot;Roboto Mono&amp;quot;, &amp;quot;Courier New&amp;quot;, Courier, sans-serif, system-ui; overflow: auto; text-wrap-mode: wrap; word-break: break-all; padding: 16px; color: rgb(15, 17, 21); text-align: start; margin: 0px !important;&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;Результат классификации&lt;/font&gt;&lt;/pre&gt;" vertex="1">
           <mxGeometry height="30" width="230" x="-764" y="290" as="geometry" />
         </mxCell>
@@ -361,6 +353,14 @@
         </mxCell>
         <mxCell id="C107gXivKD9xKijmlaR7-7" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="C107gXivKD9xKijmlaR7-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="uCwv0CKlvjAdJUgz0ARH-14" value="">
           <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="C107gXivKD9xKijmlaR7-10" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="C107gXivKD9xKijmlaR7-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=8 8;" target="uCwv0CKlvjAdJUgz0ARH-12">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-514" y="244" />
+              <mxPoint x="-514" y="135" />
+            </Array>
+          </mxGeometry>
         </mxCell>
         <mxCell id="C107gXivKD9xKijmlaR7-4" parent="WIyWlLk6GJQsqaUBKTNV-1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;span style=&quot;color: rgb(26, 26, 26); font-family: &amp;quot;Source Sans 3&amp;quot;, &amp;quot;Adjusted Arial Fallback&amp;quot;, sans-serif; font-size: medium; text-align: start; background-color: rgb(255, 255, 255);&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;color: rgb(26, 26, 26); font-family: &amp;quot;Source Sans 3&amp;quot;, &amp;quot;Adjusted Arial Fallback&amp;quot;, sans-serif; text-align: start; background-color: rgb(255, 255, 255);&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;PESO-оптимизация&lt;/font&gt;&lt;/span&gt;" vertex="1">
           <mxGeometry height="24" width="230" x="-764" y="230" as="geometry" />
